@@ -23,8 +23,90 @@ using std::fill;
  *   connected stones or liberties.
  ***********************************************************************/
 
+bool out_of_board(int row, int col) {
+	return (row < 0 || row > 19 || col < 0 || col > 19);
+}
+
+bool in_board(int row, int col) {
+	return !(row < 0 || row > 19 || col < 0 || col > 19);
+}
+
+void connected_part_rec(const Stone board[][19], int row, int col, bool connected_part[][19], bool liberties[][19], int selected_color);
+void fill_liberties(const Stone board[][19], int row, int col, bool connected_part[][19], bool liberties[][19], int selected_color);
+
 int check_liberties(const Stone board[][19], int row, int col, bool connected_part[][19], bool liberties[][19]) {
-	return -1;
+	if (out_of_board(row, col)) {
+		return -1;
+	} else if (!board[row][col]) {
+		return -2;
+	}
+
+	connected_part_rec(board, row, col, connected_part, liberties, board[row][col]);
+	fill_liberties(board, row, col, connected_part, liberties, board[row][col]);
+
+	int numOfConnected = 0;
+	for (int i = 0; i < 19; ++i) {
+		for (int j = 0; j < 19; ++j) {
+			numOfConnected += connected_part[i][j];
+		}
+	}
+
+	int numOfLiberties = 0;
+	for (int i = 0; i < 19; ++i) {
+		for (int j = 0; j < 19; ++j) {
+			numOfLiberties += liberties[i][j];
+		}
+	}
+
+	return numOfLiberties;
+}
+
+void fill_liberties(const Stone board[][19], int row, int col, bool connected_part[][19], bool liberties[][19], int selected_color) {
+	for (int i = 0; i < 19; ++i) {
+		for (int j = 0; j < 19; ++j) {
+			if (connected_part[i][j] == selected_color) {
+				if (in_board(i-1, j) && !board[i-1][j]) {
+					liberties[i-1][j] = true;
+				}
+
+				if (in_board(i, j+1) && !board[i][j+1]) {
+					liberties[i][j+1] = true;
+				}
+
+				if (in_board(i+1, j) && !board[i+1][j]) {
+					liberties[i+1][j] = true;
+				}
+
+				if (in_board(i, j-1) && !board[i][j-1]) {
+					liberties[i][j-1] = true;
+				}
+			}
+		}
+	}
+}
+
+void connected_part_rec(const Stone board[][19], int row, int col, bool connected_part[][19], bool liberties[][19], int selected_color) {
+	if (in_board(row-1, col) && board[row-1][col] == selected_color && !connected_part[row-1][col]) {
+		connected_part[row-1][col] = true;
+		connected_part_rec(board, row-1, col, connected_part, liberties, selected_color);
+	}
+
+	if (in_board(row, col+1) && board[row][col+1] == selected_color && !connected_part[row][col+1]) {
+		connected_part[row][col+1] = true;
+		connected_part_rec(board, row, col+1, connected_part, liberties, selected_color);
+	}
+
+	if (in_board(row+1, col) && board[row+1][col] == selected_color && !connected_part[row+1][col]) {
+		connected_part[row+1][col] = true;
+		connected_part_rec(board, row+1, col, connected_part, liberties, selected_color);
+	}
+
+	if (in_board(row, col-1) && board[row][col-1] == selected_color && !connected_part[row][col-1]) {
+		connected_part[row][col-1] = true;
+		connected_part_rec(board, row, col-1, connected_part, liberties, selected_color);
+	}
+
+	return;
 }
 
 /***********************************************************************
@@ -36,7 +118,22 @@ int check_liberties(const Stone board[][19], int row, int col, bool connected_pa
  ***********************************************************************/
 
 bool find_captured(const Stone board[][19], Stone player, bool captured[][19]) {
-	return false;
+	bool haveCaptured = false;
+	for (int row = 0; row < 19; ++row) {
+		for (int col = 0; col < 19; ++col) {
+			if (board[row][col] == player) {
+				bool connected_part[19][19], liberties[19][19];
+				fill(&connected_part[0][0], &connected_part[18][18], false);
+				fill(&liberties[0][0], &liberties[18][18], false);
+				int numOfLiberties = check_liberties(board, row, col, connected_part, liberties);
+				if (!numOfLiberties) {
+					captured[row][col] = true;
+					haveCaptured = true;
+				}
+			}
+		}
+	}
+	return haveCaptured;
 }
 
 /***********************************************************************
