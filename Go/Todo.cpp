@@ -42,6 +42,7 @@ int check_liberties(const Stone board[][19], int row, int col, bool connected_pa
 	}
 
 	connected_part_rec(board, row, col, connected_part, liberties, board[row][col]);
+
 	fill_liberties(board, row, col, connected_part, liberties, board[row][col]);
 
 	int numOfConnected = 0;
@@ -64,7 +65,7 @@ int check_liberties(const Stone board[][19], int row, int col, bool connected_pa
 void fill_liberties(const Stone board[][19], int row, int col, bool connected_part[][19], bool liberties[][19], int selected_color) {
 	for (int i = 0; i < 19; ++i) {
 		for (int j = 0; j < 19; ++j) {
-			if (connected_part[i][j] == selected_color) {
+			if (board[i][j] == selected_color || connected_part[i][j]) {
 				if (in_board(i-1, j) && !board[i-1][j]) {
 					liberties[i-1][j] = true;
 				}
@@ -144,14 +145,53 @@ bool find_captured(const Stone board[][19], Stone player, bool captured[][19]) {
  * - Check whether the intersection is occupied. If so, return -2 and do 
  *   nothing.
  * - Check whether this is suicide. If so, return -3 and do nothing. 
- * - Modify board, including both adding the stone and removing captured 
+ * - Modify board, including both adding the stone and removing captured
  *   stones if applicable. Update record and return 0.
  * - Append the current move to the record. You need to set counter and 
  *   max_steps correctly.
  ***********************************************************************/
 
 int edit(Stone board[][19], Stone player, int row, int col, int record[][2], int& counter, int& max_steps) {
-	return -1;
+	if (out_of_board(row, col)) {
+		return -1;
+	}
+
+	if (board[row][col]) {
+		return -2;
+	}
+
+	board[row][col] = player;
+
+	bool connected_part[19][19], liberties[19][19], captured[19][19];
+	fill(&connected_part[0][0], &connected_part[18][18], false);
+	fill(&liberties[0][0], &liberties[18][18], false);
+	fill(&captured[0][0], &captured[18][18], false);
+
+	int numOfLiberties = check_liberties(board, row, col, connected_part, liberties);
+
+	if (numOfLiberties == 0) {
+		board[row][col] = Empty;
+		return -3;
+	}
+
+	bool haveCaptured = find_captured(board, player, captured);
+	if (haveCaptured) {
+		for (int i = 0; i < 19; ++i) {
+			for (int j = 0; j < 19; ++j) {
+				if (captured[i][j]) {
+					board[i][j] = Empty;
+				}
+			}
+		}
+	}
+
+	record[counter][0] = row;
+	record[counter][1] = col;
+
+	++counter;
+	++max_steps;
+
+	return 0;
 }
 
 /***********************************************************************
