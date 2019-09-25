@@ -104,7 +104,7 @@ int main() {
 			is_this_skipped = true;
 			record[counter][0] = -1, record[counter][1] = -1;
 			counter++;
-			max_steps=counter;
+			max_steps = counter;
 			break;
 
 		case 'g':
