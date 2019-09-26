@@ -114,8 +114,6 @@ int check_liberties(const Stone board[][19], int row, int col, bool connected_pa
  *   Return true if and only if there are any captured stones.
  ***********************************************************************/
 
-// Use default value and avoid
-
 void set_zeros(bool arr[][19]) {
 	for (int i = 0; i < 19; ++i) {
 		for (int j = 0; j < 19; ++j) {
@@ -202,11 +200,14 @@ int edit(Stone board[][19], Stone player, int row, int col, int record[][2], int
 		}
 	}
 
+	bool changedRecord = !(record[counter][0] == row && record[counter][1] == col);
+
 	record[counter][0] = row;
 	record[counter][1] = col;
 
-	++counter;
-	++max_steps;
+	if (++counter > max_steps || changedRecord) {
+		max_steps = counter;
+	}
 
 	return 0;
 }
@@ -218,23 +219,17 @@ int edit(Stone board[][19], Stone player, int row, int col, int record[][2], int
  *   value of counter and max_steps.
  ***********************************************************************/
 
-void print_arr(int arr[][19]) {
-	for (int i = 0; i < 19; ++i) {
-		for (int j = 0; j < 19; ++j) {
-			cout << arr[i][j] << " ";
-		}
-		cout << endl;
-	}
-}
-
 void jump_to(Stone board[][19], int target, int record[][2], int& counter, int& max_steps) {
-//	set_empty(board);
-//	counter = 0;
-//	max_steps = 0;
-//	for (int i = 0; i < target; ++i) {
-//		Stone player = i%2 == 0 ? Black : White;
-//		int row = record[i][0];
-//		int col = record[i][1];
-//		cout << response << endl;
-//	}
+	set_empty(board);
+	counter = 0;
+	for (int i = 0; i < target; ++i) {
+		Stone player = i%2 == 0 ? Black : White;
+		int row = record[i][0];
+		int col = record[i][1];
+		if (row == -1 && col == -1) {
+			++counter;
+		} else {
+			edit(board, player, row, col, record, counter, max_steps);
+		}
+	}
 }
