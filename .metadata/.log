@@ -768,3 +768,56 @@ org.eclipse.core.commands.NotEnabledException: Trying to execute the disabled co
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:660)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:597)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1468)
+!SESSION 2019-09-26 15:47:08.223 -----------------------------------------------
+eclipse.buildId=4.12.0.I20190605-1800
+java.version=11.0.1
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_HK
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -keyring /Users/keitaiwasaki/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.cpp.product -keyring /Users/keitaiwasaki/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2019-09-26 15:47:14.680
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.egit.core 1 0 2019-09-26 15:47:14.750
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-09-26 15:47:20.475
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-09-26 15:47:20.477
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType
+
+!ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-09-26 15:47:22.104
+!MESSAGE No .vrapperrc or _vrapperrc found.
+
+!ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-09-26 15:48:08.278
+!MESSAGE No .vrapperrc or _vrapperrc found.
+
+!ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-09-26 17:15:24.555
+!MESSAGE No .vrapperrc or _vrapperrc found.
+
+!ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-09-26 17:39:02.108
+!MESSAGE No .vrapperrc or _vrapperrc found.
+!SESSION 2019-09-27 11:27:37.196 -----------------------------------------------
+eclipse.buildId=4.12.0.I20190605-1800
+java.version=11.0.1
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_HK
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -keyring /Users/keitaiwasaki/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.cpp.product -keyring /Users/keitaiwasaki/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2019-09-27 11:27:54.556
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.egit.core 1 0 2019-09-27 11:27:54.616
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-09-27 11:28:00.135
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-09-27 11:28:00.137
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType
+
+!ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-09-27 11:28:01.769
+!MESSAGE No .vrapperrc or _vrapperrc found.

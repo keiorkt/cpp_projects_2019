@@ -1771,3 +1771,459 @@ Invoking: MacOS X C++ Linker
 g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
 Finished building target: Go
  
+15:53:33 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+15:55:51 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+15:56:19 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+16:11:33 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+16:12:11 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+16:14:58 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+16:17:31 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+16:18:49 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:19:31 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:20:30 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:23:59 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:27:12 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:27:47 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:35:19 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+../Todo.cpp:214:70: error: reference to overloaded function could not be resolved; did you mean to call it?
+        cout << "record[counter][0] == row" << record[counter][0] == row << endl;
+                                                                            ^~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/ostream:999:1: note: possible target for call
+endl(basic_ostream<_CharT, _Traits>& __os)
+^
+../Todo.cpp:215:70: error: reference to overloaded function could not be resolved; did you mean to call it?
+        cout << "record[counter][1] == col" << record[counter][1] == col << endl;
+                                                                            ^~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/ostream:999:1: note: possible target for call
+endl(basic_ostream<_CharT, _Traits>& __os)
+^
+2 errors generated.
+make: *** [Todo.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+17:35:46 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+../Todo.cpp:215:4: error: expected expression
+                 << "record[counter][1] == col" << (record[counter][1] == col) << endl;
+                 ^
+1 error generated.
+make: *** [Todo.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+17:35:51 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:35:54 **** Incremental Build of configuration Debug for project Go ****
+make all 
+make: Nothing to be done for `all'.
+17:36:41 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:37:18 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:37:26 **** Incremental Build of configuration Debug for project Go ****
+make all 
+make: Nothing to be done for `all'.
+17:38:48 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:45:49 **** Incremental Build of configuration Debug for project Go ****
+make all 
+make: Nothing to be done for `all'.
+17:46:51 **** Incremental Build of configuration Debug for project Go ****
+make all 
+make: Nothing to be done for `all'.
+17:47:45 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:48:25 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:49:04 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:50:47 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+../Todo.cpp:206:17: error: invalid operands to binary expression ('std::__1::streamsize' (aka 'long') and 'const char [8]')
+        cout.width(30) << "record[" << counter << "][0] == row  " << (record[counter][0] == row) << " record[" << counter<< "][1] == col  " << (record[counter][1] == col) << endl;
+        ~~~~~~~~~~~~~~ ^  ~~~~~~~~~
+1 error generated.
+make: *** [Todo.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+17:51:06 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:51:21 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:53:03 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:54:21 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:55:45 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:56:08 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:57:33 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:57:58 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+17:58:15 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+18:00:10 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+18:01:28 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+18:05:48 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+18:09:47 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+18:15:01 **** Incremental Build of configuration Debug for project Go ****
+make all 
+make: Nothing to be done for `all'.
+18:15:11 **** Incremental Build of configuration Debug for project Go ****
+make all 
+make: Nothing to be done for `all'.
