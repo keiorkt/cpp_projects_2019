@@ -175,7 +175,7 @@ int edit(Stone board[][19], Stone player, int row, int col, int record[][2], int
 
 	fill(&captured[0][0], &captured[18][18]+1, false);
 
-	Stone opponent = (player == White) ? Black : White;
+	Stone opponent = (player == White ? Black : White);
 	bool isCaptured = find_captured(board, opponent, captured);
 	if (isCaptured) {
 		for (int i = 0; i < 19; ++i) {
@@ -210,7 +210,7 @@ void jump_to(Stone board[][19], int target, int record[][2], int& counter, int& 
 	fill(&board[0][0], &board[18][18]+1, Empty);
 	counter = 0;
 	for (int i = 0; i < target; ++i) {
-		Stone player = i%2 == 0 ? Black : White;
+		Stone player = (i%2 == 0 ? Black : White);
 		int row = record[i][0];
 		int col = record[i][1];
 		if (row == -1 && col == -1) {
