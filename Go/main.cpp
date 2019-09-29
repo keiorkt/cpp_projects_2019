@@ -130,8 +130,8 @@ int main() {
 			row = b - 1;
 			{
 				bool connected_part[19][19], liberties[19][19];
-				fill(&connected_part[0][0], &connected_part[18][18], false);
-				fill(&liberties[0][0], &liberties[18][18], false);
+				fill(&connected_part[0][0], &connected_part[18][18]+1, false);
+				fill(&liberties[0][0], &liberties[18][18]+1, false);
 				int rv = check_liberties(board, row, col, connected_part, liberties);
 				switch (rv){
 				case -1:

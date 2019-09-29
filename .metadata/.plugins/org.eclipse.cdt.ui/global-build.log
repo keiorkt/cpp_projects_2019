@@ -2227,3 +2227,59 @@ make: Nothing to be done for `all'.
 18:15:11 **** Incremental Build of configuration Debug for project Go ****
 make all 
 make: Nothing to be done for `all'.
+01:06:07 **** Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+15:09:13 **** Incremental Build of configuration Debug for project Go ****
+make all 
+
+
+Agreeing to the Xcode/iOS license requires admin privileges, please run “sudo xcodebuild -license” and then retry this command.
+
+
+"make all" terminated with exit code 69. Build might be incomplete.
+15:09:22 **** Incremental Build of configuration Debug for project Go ****
+make all 
+
+
+Agreeing to the Xcode/iOS license requires admin privileges, please run “sudo xcodebuild -license” and then retry this command.
+
+
+"make all" terminated with exit code 69. Build might be incomplete.
+15:09:25 **** Incremental Build of configuration Debug for project Go ****
+make all 
+
+
+Agreeing to the Xcode/iOS license requires admin privileges, please run “sudo xcodebuild -license” and then retry this command.
+
+
+"make all" terminated with exit code 69. Build might be incomplete.
+15:13:01 **** Incremental Build of configuration Debug for project Go ****
+make all 
+Building file: ../Todo.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Todo.d" -MT"Todo.o" -o "Todo.o" "../Todo.cpp"
+Finished building: ../Todo.cpp
+ 
+Building file: ../main.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: Go
+Invoking: MacOS X C++ Linker
+g++  -o "Go"  ./Helper.o ./Todo.o ./main.o   
+Finished building target: Go
+ 
+15:13:34 **** Incremental Build of configuration Debug for project Go ****
+make all 
+make: Nothing to be done for `all'.

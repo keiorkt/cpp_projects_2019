@@ -31,6 +31,30 @@ bool in_board(int row, int col) {
  *   connected stones or liberties.
  ***********************************************************************/
 
+void fill_connected(const Stone board[][19], int row, int col, bool connected_part[][19], Stone player);
+void fill_cell_liberties(const Stone board[][19], int row, int col, bool liberties[][19]);
+void fill_liberties(const Stone board[][19], int row, int col, const bool connected_part[][19], bool liberties[][19]);
+
+int check_liberties(const Stone board[][19], int row, int col, bool connected_part[][19], bool liberties[][19]) {
+	if (out_of_board(row, col)) {
+		return -1;
+	} else if (board[row][col] == Empty) {
+		return -2;
+	}
+
+	Stone player = board[row][col];
+	fill_connected(board, row, col, connected_part, player);
+	fill_liberties(board, row, col, connected_part, liberties);
+
+	int sumOfLiberties = 0;
+	for (int i = 0; i < 19; ++i) {
+		for (int j = 0; j < 19; ++j)
+			sumOfLiberties += liberties[i][j];
+	}
+
+	return sumOfLiberties;
+}
+
 void fill_connected(const Stone board[][19], int row, int col, bool connected_part[][19], Stone player) {
 	if (in_board(row+1, col) && board[row+1][col] == player && !connected_part[row+1][col]) {
 		connected_part[row+1][col] = true;
@@ -86,26 +110,6 @@ void fill_liberties(const Stone board[][19], int row, int col, const bool connec
 	}
 }
 
-int check_liberties(const Stone board[][19], int row, int col, bool connected_part[][19], bool liberties[][19]) {
-	if (out_of_board(row, col)) {
-		return -1;
-	} else if (board[row][col] == Empty) {
-		return -2;
-	}
-
-	Stone player = board[row][col];
-	fill_connected(board, row, col, connected_part, player);
-	fill_liberties(board, row, col, connected_part, liberties);
-
-	int sumOfLiberties = 0;
-	for (int i = 0; i < 19; ++i) {
-		for (int j = 0; j < 19; ++j)
-			sumOfLiberties += liberties[i][j];
-	}
-
-	return sumOfLiberties;
-}
-
 /***********************************************************************
  * TODO_2: Check whether a player has captured stones, and mark them.
  * 
@@ -114,23 +118,6 @@ int check_liberties(const Stone board[][19], int row, int col, bool connected_pa
  *   Return true if and only if there are any captured stones.
  ***********************************************************************/
 
-void set_zeros(bool arr[][19]) {
-	for (int i = 0; i < 19; ++i) {
-		for (int j = 0; j < 19; ++j) {
-			arr[i][j] = false;
-		}
-	}
-}
-
-void set_empty(Stone arr[][19]) {
-	for (int i = 0; i < 19; ++i) {
-		for (int j = 0; j < 19; ++j) {
-			arr[i][j] = Empty;
-		}
-	}
-}
-
-
 bool find_captured(const Stone board[][19], Stone player, bool captured[][19]) {
 	bool connected_part[19][19], liberties[19][19];
 	bool isCaptured = false;
@@ -138,8 +125,8 @@ bool find_captured(const Stone board[][19], Stone player, bool captured[][19]) {
 	for (int row = 0; row < 19; ++row) {
 		for (int col = 0; col < 19; ++col) {
 			if (board[row][col] == player) {
-				set_zeros(connected_part);
-				set_zeros(liberties);
+				fill(&connected_part[0][0], &connected_part[18][18]+1, false);
+				fill(&liberties[0][0], &liberties[18][18]+1, false);
 				int numOfLiberties = check_liberties(board, row, col, connected_part, liberties);
 				if (!numOfLiberties) {
 					isCaptured = true;
@@ -178,7 +165,7 @@ int edit(Stone board[][19], Stone player, int row, int col, int record[][2], int
 	board[row][col] = player;
 
 	bool captured[19][19];
-	set_zeros(captured);
+	fill(&captured[0][0], &captured[18][18]+1, false);
 
 	bool isSuicide = find_captured(board, player, captured);
 	if (isSuicide) {
@@ -186,7 +173,7 @@ int edit(Stone board[][19], Stone player, int row, int col, int record[][2], int
 		return -3;
 	}
 
-	set_zeros(captured);
+	fill(&captured[0][0], &captured[18][18]+1, false);
 
 	Stone opponent = (player == White) ? Black : White;
 	bool isCaptured = find_captured(board, opponent, captured);
@@ -220,7 +207,7 @@ int edit(Stone board[][19], Stone player, int row, int col, int record[][2], int
  ***********************************************************************/
 
 void jump_to(Stone board[][19], int target, int record[][2], int& counter, int& max_steps) {
-	set_empty(board);
+	fill(&board[0][0], &board[18][18]+1, Empty);
 	counter = 0;
 	for (int i = 0; i < target; ++i) {
 		Stone player = i%2 == 0 ? Black : White;
