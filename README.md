@@ -2,7 +2,7 @@
 
 ## Software and Tool
  - C++11
- - eclipse
+ - eclipse & vim
 
 ## Go（囲碁）
  - Go on console
