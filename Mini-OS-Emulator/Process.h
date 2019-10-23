@@ -23,6 +23,7 @@ public:
 	void execute(unsigned int time); // Simulate execution of Process.
 	void wait(unsigned int time); // Simulate waiting of Process in the queue.
 	void promote_priority(); // Increase Process priority by 1.
+	void reset_aging_counter(); // set aging counter to 0
 
 private:
 	const unsigned int pid{0}; // Process ID.

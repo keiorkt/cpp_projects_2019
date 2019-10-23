@@ -9,8 +9,6 @@
 ProcessNode::ProcessNode() {}
 
 // TODO, You may also use initializer list syntax " : ".
-ProcessNode::ProcessNode(Process* process, ProcessNode* next, ProcessNode* prev) {}
+ProcessNode::ProcessNode(Process* process, ProcessNode* next, ProcessNode* prev) : process{process}, next{next}, prev{prev} {}
 
-ProcessNode::~ProcessNode() {
-	// TODO
-}
+ProcessNode::~ProcessNode() {}

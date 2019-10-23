@@ -19,7 +19,8 @@ ProcessQueue::ProcessQueue() {
 }
 
 ProcessQueue::~ProcessQueue() {
-	// TODO
+	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next, delete current_node->prev) {}
+	delete sentinel;
 }
 
 void ProcessQueue::print() const {
@@ -37,27 +38,56 @@ void ProcessQueue::print() const {
 	cout << "================================================================================" << endl;
 }
 
+// TODO
 ProcessQueue* ProcessQueue::perform_aging(unsigned int time, const unsigned int aging_threshold) {
-	return nullptr; // TODO
+	ProcessQueue* process_queue = new ProcessQueue{};
+	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
+		current_node->process->wait(time);
+		if (current_node->process->get_aging_counter() >= aging_threshold) {
+			current_node->process->promote_priority();
+			*Process removed_process = remove(current_node);
+	 		process_queue->enqueue(removed_process);
+		}
+	}
+	return process_queue;
 }
 
 void ProcessQueue::merge_back(ProcessQueue* process_queue) {
-	// TODO
+	if (process_queue->is_empty()) return;
+	ProcessNode* new_tail_node = process_queue->sentinel->prev;
+	this->sentinel->prev->next = process_queue->sentinel->next;
+	process_queue->sentinel->next->prev = this->sentinel->prev;
+	new_tail_node->next = this->sentinel;
+	this->sentinel->prev = new_tail_node;
+	delete process_queue->sentinel;
 }
 
 void ProcessQueue::enqueue(Process* process) {
-	// TODO
+	ProcessNode* new_process_node = new ProcessNode{process, sentinel->next, sentinel};
+	sentinel->next->prev = new_process_node;
+	sentinel->next = new_process_node;
 }
 
 Process* ProcessQueue::dequeue() {
-	return nullptr; // TODO
+	return remove(sentinel);
 }
 
 bool ProcessQueue::is_empty() const {
-	return false; // TODO
+	return (sentinel->next == sentinel);
 }
 
 // Be very careful when deleting the ProcessNode, don't accidentally delete the Process that we actually want to extract and return.
 Process* ProcessQueue::remove(ProcessNode* process_node) {
-	return nullptr; // TODO
+	if (!is_empty()) {
+		for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
+			if (current_node == process_node) {
+				current_node->next->prev = current_node->prev;
+				current_node->prev->next = current_node->next;
+				Process* process = current_node->process;
+				delete current_node;
+				return process;
+			}
+		}
+	}
+	return nullptr;
 }
