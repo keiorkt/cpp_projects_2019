@@ -45,8 +45,7 @@ ProcessQueue* ProcessQueue::perform_aging(unsigned int time, const unsigned int 
 		current_node->process->wait(time);
 		if (current_node->process->get_aging_counter() >= aging_threshold) {
 			current_node->process->promote_priority();
-			*Process removed_process = remove(current_node);
-	 		process_queue->enqueue(removed_process);
+	 		process_queue->enqueue(remove(current_node));
 		}
 	}
 	return process_queue;

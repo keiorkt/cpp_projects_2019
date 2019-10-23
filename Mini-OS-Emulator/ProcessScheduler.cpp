@@ -109,7 +109,6 @@ void ProcessScheduler::simulate(unsigned int time) {
 			quantum_counter = 0;
 		}
 
-	  // priority_queues[i-1].perform_aging(EXEC_TIME, aging_threshold);
 		if (aging_threshold != 0) {
 			bool start_aging = false;
 			for (unsigned int i{max_priority + 1}; i > 0; --i) {
@@ -120,7 +119,6 @@ void ProcessScheduler::simulate(unsigned int time) {
 			}
 		}
 
-		// search the next heighest priority process
 		Process* next_process;
 		for (unsigned int i{max_priority + 1}; i > 0; --i) {
 			if (!priority_queues[i-1].is_empty()) {
