@@ -11,4 +11,7 @@ ProcessNode::ProcessNode() {}
 // TODO, You may also use initializer list syntax " : ".
 ProcessNode::ProcessNode(Process* process, ProcessNode* next, ProcessNode* prev) : process{process}, next{next}, prev{prev} {}
 
-ProcessNode::~ProcessNode() {}
+// debug
+ProcessNode::~ProcessNode() {
+  cout << "Process ID : " << (process->get_pid()) << " Address : " << this << " Bye!" << endl;
+}

@@ -8,16 +8,12 @@
 #include "ProcessScheduler.h"
 
 // TODO, You may also use initializer list syntax " : ".
-ProcessScheduler::ProcessScheduler(const unsigned int quantum_threshold, const unsigned int max_priority, const unsigned int aging_threshold) {
-	this->quantum_threshold = quantum_threshold;
-	this->max_priority = max_priority;
-	this->aging_threshold = aging_threshold;
+ProcessScheduler::ProcessScheduler(const unsigned int quantum_threshold, const unsigned int max_priority, const unsigned int aging_threshold) :
+	quantum_threshold{quantum_threshold}, max_priority{max_priority}, aging_threshold{aging_threshold} {
 	this->priority_queues = new ProcessQueue[max_priority+1];
 }
 
 ProcessScheduler::~ProcessScheduler() {
-	for (unsigned int i{max_priority + 1}; i > 0; --i)
-		delete priority_queues[i-1];
 	delete [] priority_queues;
 }
 
@@ -48,6 +44,7 @@ void ProcessScheduler::print() const {
 	for (unsigned int i{max_priority + 1}; i > 0; --i) {
 		cout << endl;
 		cout << "Priority Queue " << i - 1 << ": \n";
+		cout << "is_empty : " << std::boolalpha << priority_queues[i-1].is_empty() << "\n";
 		priority_queues[i - 1].print();
 
 	}
@@ -84,8 +81,9 @@ void ProcessScheduler::add_process(unsigned int execute_time, unsigned int prior
  * Do nothing if no Process to execute.
  */
 void ProcessScheduler::simulate(unsigned int time) {
-	const EXEC_TIME = 1;
+	const int EXEC_TIME = 1;
 
+  // Do nothing if no Process to execute. If all the queues are empty continue the for loop
 	for (unsigned int i = 0; i < time; ++i) {
 		if (current_process == nullptr) {
 			bool all_empty = true;
@@ -99,29 +97,43 @@ void ProcessScheduler::simulate(unsigned int time) {
 
 		current_process->execute(EXEC_TIME);
 
+    // if quantum threshold is not 0 increment the quantum counter
 		if (quantum_threshold != 0) {
 			++quantum_counter;
 		}
 
+    // if current process is done, delete and set quantum counter to 0
 		if (current_process->get_execute_time() == 0) {
+			cout << "ProcessScheduler.cpp #106 Deleting current process" << endl;
 			delete current_process;
 			current_process = nullptr;
 			quantum_counter = 0;
 		}
 
+    // perform Aging (if Aging Threshold is zero, ignore Aging steps)
 		if (aging_threshold != 0) {
 			bool start_aging = false;
 			for (unsigned int i{max_priority + 1}; i > 0; --i) {
-				if (start_aging)
-					priority_queues[i].merge_back([i-1].perform_aging(EXEC_TIME, aging_threshold));
-				else if (!priority_queues[i-1].is_empty() || (current_process != nullptr && current_process->get_priority() == i-1))
+				if (start_aging) {
+					priority_queues[i].merge_back(priority_queues[i-1].perform_aging(EXEC_TIME, aging_threshold));
+				}
+				else if (!priority_queues[i-1].is_empty() || (current_process != nullptr && current_process->get_priority() == i-1)) {
 					start_aging = true;
+				}
 			}
 		}
 
+		// Swap to next highest priority Process if Current Process has finished execution,
+		// Otherwise, swap out Current Process and reset Quantum Counter, if have a higher priority Process or reached/exceeded Quantum Threshold.
+
+		/* 2019.10.25 found a bug here. program is trying to swap to the next heighest priority process
+			 when we simulate for once and the current process will be filled with garbage values and a new process node is set in the queue
+		*/
 		Process* next_process;
 		for (unsigned int i{max_priority + 1}; i > 0; --i) {
+			// why this is_empty() can be false??
 			if (!priority_queues[i-1].is_empty()) {
+				cout << "ProcessScheduler.cpp swaping to the next process" << endl;
 				next_process = priority_queues[i-1].dequeue();
 				break;
 			}

@@ -19,6 +19,7 @@ ProcessQueue::ProcessQueue() {
 }
 
 ProcessQueue::~ProcessQueue() {
+	cout << "ProcessQueue deconstructor is called" << endl;
 	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next, delete current_node->prev) {}
 	delete sentinel;
 }
@@ -39,25 +40,28 @@ void ProcessQueue::print() const {
 }
 
 // TODO
+// Performs Aging on all Processes in ProcessQueue. Extracts and returns a ProcessQueue of Processes with incremented priority (can be empty).
 ProcessQueue* ProcessQueue::perform_aging(unsigned int time, const unsigned int aging_threshold) {
-	ProcessQueue* process_queue = new ProcessQueue{};
+	ProcessQueue* incremented_process_queue = new ProcessQueue;
 	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
 		current_node->process->wait(time);
 		if (current_node->process->get_aging_counter() >= aging_threshold) {
 			current_node->process->promote_priority();
-	 		process_queue->enqueue(remove(current_node));
+			cout << "ProcessQueue.cpp performing aging" << endl;
+	 		incremented_process_queue->enqueue(remove(current_node));
 		}
 	}
-	return process_queue;
+	return incremented_process_queue;
 }
 
 void ProcessQueue::merge_back(ProcessQueue* process_queue) {
 	if (process_queue->is_empty()) return;
 	ProcessNode* new_tail_node = process_queue->sentinel->prev;
-	this->sentinel->prev->next = process_queue->sentinel->next;
-	process_queue->sentinel->next->prev = this->sentinel->prev;
-	new_tail_node->next = this->sentinel;
-	this->sentinel->prev = new_tail_node;
+	sentinel->prev->next = process_queue->sentinel->next;
+	process_queue->sentinel->next->prev = sentinel->prev;
+	new_tail_node->next = sentinel;
+	sentinel->prev = new_tail_node;
+	cout << "Deleting process_queue" << endl;
 	delete process_queue->sentinel;
 }
 
@@ -68,7 +72,9 @@ void ProcessQueue::enqueue(Process* process) {
 }
 
 Process* ProcessQueue::dequeue() {
-	return remove(sentinel);
+	// Remove Process from the front of ProcessQueue and returns it.
+	cout << "ProcessQueue.cpp dequeueing" << endl;
+	return remove(sentinel->next);
 }
 
 bool ProcessQueue::is_empty() const {
@@ -83,6 +89,7 @@ Process* ProcessQueue::remove(ProcessNode* process_node) {
 				current_node->next->prev = current_node->prev;
 				current_node->prev->next = current_node->next;
 				Process* process = current_node->process;
+				cout << "Removing current node" << endl;
 				delete current_node;
 				return process;
 			}
