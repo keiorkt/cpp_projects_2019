@@ -5,6 +5,9 @@ all: mini-os-emulator
 run: mini-os-emulator
 	./mini-os-emulator
 
+doctor: mini-os-emulator
+	 ~/Downloads/DrMemory-MacOS-2.2.1-alpha2/bin64/drmemory -- mini-os-emulator
+
 mini-os-emulator: main.o Process.o ProcessNode.o ProcessQueue.o ProcessScheduler.o
 	g++ -std=c++11 main.o Process.o ProcessNode.o ProcessQueue.o ProcessScheduler.o -o mini-os-emulator
 

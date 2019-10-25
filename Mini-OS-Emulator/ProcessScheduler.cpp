@@ -14,6 +14,10 @@ ProcessScheduler::ProcessScheduler(const unsigned int quantum_threshold, const u
 }
 
 ProcessScheduler::~ProcessScheduler() {
+	if (has_current_process()) {
+		delete current_process;
+	}
+
 	delete [] priority_queues;
 }
 
@@ -44,7 +48,6 @@ void ProcessScheduler::print() const {
 	for (unsigned int i{max_priority + 1}; i > 0; --i) {
 		cout << endl;
 		cout << "Priority Queue " << i - 1 << ": \n";
-		cout << "is_empty : " << std::boolalpha << priority_queues[i-1].is_empty() << "\n";
 		priority_queues[i - 1].print();
 
 	}
@@ -104,7 +107,6 @@ void ProcessScheduler::simulate(unsigned int time) {
 
     // if current process is done, delete and set quantum counter to 0
 		if (current_process->get_execute_time() == 0) {
-			cout << "ProcessScheduler.cpp #106 Deleting current process" << endl;
 			delete current_process;
 			current_process = nullptr;
 			quantum_counter = 0;
@@ -119,30 +121,31 @@ void ProcessScheduler::simulate(unsigned int time) {
 			}
 		}
 
-		// Swap to next highest priority Process if Current Process has finished execution,
-		// Otherwise, swap out Current Process and reset Quantum Counter, if have a higher priority Process or reached/exceeded Quantum Threshold.
-
-		/* 2019.10.25 found a bug here. program is trying to swap to the next heighest priority process
-			 when we simulate for once and the current process will be filled with garbage values and a new process node is set in the queue
-		*/
-
 		if (current_process == nullptr) {
-			cout << "ProcessScheduler.cpp setting current process to next process" << endl;
-			current_process = find_next_process();
+			current_process = dequeue_next_process();
 		}
-		else if ((quantum_threshold != 0 && quantum_counter >= quantum_threshold) || (current_process == nullptr && find_next_process()->get_priority() > current_process->get_priority())){
-			cout << "ProcessScheduler.cpp swapping current process to next process" << endl;
+		else if ((quantum_threshold != 0 && quantum_counter >= quantum_threshold) || (current_process == nullptr && get_next_process()->get_priority() > current_process->get_priority())){
 			priority_queues[current_process->get_priority()].enqueue(current_process);
-			current_process = find_next_process();
+			current_process = dequeue_next_process();
 			quantum_counter = 0;
 		}
 	}
 }
 
-Process* ProcessScheduler::find_next_process() {
+Process* ProcessScheduler::get_next_process() const {
 	for (unsigned int i{max_priority + 1}; i > 0; --i) {
 		if (!priority_queues[i-1].is_empty()) {
-			cout << "ProcessScheduler.cpp swaping to the next process" << endl;
+			return priority_queues[i-1].get_head();
+			break;
+		}
+	}
+	return nullptr;
+}
+
+
+Process* ProcessScheduler::dequeue_next_process() {
+	for (unsigned int i{max_priority + 1}; i > 0; --i) {
+		if (!priority_queues[i-1].is_empty()) {
 			return priority_queues[i-1].dequeue();
 			break;
 		}

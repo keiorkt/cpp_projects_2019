@@ -19,8 +19,11 @@ ProcessQueue::ProcessQueue() {
 }
 
 ProcessQueue::~ProcessQueue() {
-	cout << "ProcessQueue deconstructor is called" << endl;
-	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next, delete current_node->prev) {}
+	for (ProcessNode* current_node{sentinel->next};
+			 current_node != sentinel;
+			 current_node = current_node->next,
+			 delete current_node->prev->process,
+			 delete current_node->prev) {}
 	delete sentinel;
 }
 
@@ -32,11 +35,9 @@ void ProcessQueue::print() const {
 	else {
 		for (ProcessNode* current_node{sentinel->next}; current_node != sentinel->prev; current_node = current_node->next) {
 			current_node->process->print();
-			cout << "head : " << std::boolalpha << (current_node == sentinel->next) << endl;
 			cout << "--------------------------------------------------------------------------------" << endl;
 		}
 		sentinel->prev->process->print();
-		cout << "head : " << std::boolalpha << (current_node == sentinel->next) << endl;
 	}
 	cout << "================================================================================" << endl;
 }
@@ -44,18 +45,20 @@ void ProcessQueue::print() const {
 // TODO
 // Performs Aging on all Processes in ProcessQueue. Extracts and returns a ProcessQueue of Processes with incremented priority (can be empty).
 ProcessQueue* ProcessQueue::perform_aging(unsigned int time, const unsigned int aging_threshold) {
-	ProcessQueue* incremented_process_queue = new ProcessQueue;
+	ProcessQueue* process_queue_ll = new ProcessQueue;
+
 	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
-		// cout << "ProcessQueue.cpp perform aging" << endl;
 		current_node->process->wait(time);
+
 		if (current_node->process->get_aging_counter() >= aging_threshold) {
-			// cout << "ProcessQueue.cpp promoting priority" << endl;
 			current_node->process->promote_priority();
 			current_node->process->reset_aging_counter();
-	 		incremented_process_queue->enqueue(remove(current_node));
+			Process* removed_node = remove(current_node);
+	 		process_queue_ll->enqueue(removed_node);
 		}
 	}
-	return incremented_process_queue;
+
+	return process_queue_ll;
 }
 
 void ProcessQueue::merge_back(ProcessQueue* process_queue) {
@@ -65,25 +68,17 @@ void ProcessQueue::merge_back(ProcessQueue* process_queue) {
 	process_queue->sentinel->next->prev = sentinel->prev;
 	new_tail_node->next = sentinel;
 	sentinel->prev = new_tail_node;
-	// 2019.10.25
-	// leave sentinel like this for now
-	//
-
-	// cout << "ProcessQueue.cpp Deleting process_queue : " << process_queue << endl;
-	// cout << "Getting sentinel address : " << process_queue->sentinel << endl;
-	// delete process_queue->sentinel;
-	// cout << "ProcessQueue.cpp Deleted sentinel: " << process_queue << endl;
+	delete process_queue->sentinel;
 }
 
 void ProcessQueue::enqueue(Process* process) {
-	ProcessNode* new_process_node = new ProcessNode{process, sentinel->next, sentinel};
-	sentinel->next->prev = new_process_node;
-	sentinel->next = new_process_node;
+	ProcessNode* new_process_node = new ProcessNode{process, sentinel, sentinel->prev};
+	sentinel->prev->next = new_process_node;
+	sentinel->prev = new_process_node;
 }
 
+// Remove Process from the front of ProcessQueue and returns it.
 Process* ProcessQueue::dequeue() {
-	// Remove Process from the front of ProcessQueue and returns it.
-	cout << "ProcessQueue.cpp dequeueing" << endl;
 	return remove(sentinel->next);
 }
 
@@ -99,12 +94,17 @@ Process* ProcessQueue::remove(ProcessNode* process_node) {
 				current_node->next->prev = current_node->prev;
 				current_node->prev->next = current_node->next;
 				Process* process = current_node->process;
-				cout << "ProcessQueue.cpp Removing current node" << endl;
-				delete current_node;
-				cout << "Process is not dead after node is deleted : " << (process->get_pid()) << endl;
+				delete current_node; // ERROR!! UNADDRESSABLE ACCESS of freed memory
 				return process;
 			}
 		}
+	}
+	return nullptr;
+}
+
+Process* ProcessQueue::get_head() const {
+	if (!is_empty()) {
+		return sentinel->next->process;
 	}
 	return nullptr;
 }

@@ -25,6 +25,7 @@ public:
 	void enqueue(Process* process); // Insert Process at the back of ProcessQueue.
 	Process* dequeue(); // Remove Process from the front of ProcessQueue and returns it.
 	bool is_empty() const; // Checks if ProcessQueue is empty, i.e. has no valid elements and only has the sentinel.
+	Process* get_head() const;
 
 private:
 	Process* remove(ProcessNode* process_node); // Removes the specified ProcessNode and returns its Process. Helper function for perform_aging().
