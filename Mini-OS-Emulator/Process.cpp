@@ -11,19 +11,19 @@
 Process::Process(const unsigned int pid, unsigned int execute_time, unsigned int priority) : pid{pid}, execute_time{execute_time}, priority{priority} {}
 
 const unsigned int Process::get_pid() const {
-	return this->pid;
+	return pid;
 }
 
 unsigned int Process::get_execute_time() const {
-	return this->execute_time;
+	return execute_time;
 }
 
 unsigned int Process::get_priority() const {
-	return this->priority;
+	return priority;
 }
 
 unsigned int Process::get_aging_counter() const {
-	return this->aging_counter;
+	return aging_counter;
 }
 
 void Process::print() const {
@@ -34,13 +34,17 @@ void Process::print() const {
 }
 
 void Process::execute(unsigned int time) {
-	this->execute_time = (this->get_execute_time() - time <= 0) ? 0 : (this->get_execute_time() - time);
+	execute_time = (get_execute_time() - time <= 0) ? 0 : (get_execute_time() - time);
 }
 
 void Process::wait(unsigned int time) {
-	this->aging_counter += time;
+	aging_counter += time;
 }
 
 void Process::promote_priority() {
-	++this->priority;
+	++priority;
+}
+
+void Process::reset_aging_counter() {
+	aging_counter = 0;
 }
