@@ -13,5 +13,5 @@ ProcessNode::ProcessNode(Process* process, ProcessNode* next, ProcessNode* prev)
 
 // debug
 ProcessNode::~ProcessNode() {
-  cout << "Process ID : " << (process->get_pid()) << " Address : " << this << " Bye!" << endl;
+  cout << "Removing Process Node with Process ID : " << (process->get_pid()) << " Address : " << this << " Bye!" << endl;
 }

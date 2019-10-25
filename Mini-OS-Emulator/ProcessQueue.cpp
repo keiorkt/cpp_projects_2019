@@ -32,9 +32,11 @@ void ProcessQueue::print() const {
 	else {
 		for (ProcessNode* current_node{sentinel->next}; current_node != sentinel->prev; current_node = current_node->next) {
 			current_node->process->print();
+			cout << "head : " << std::boolalpha << (current_node == sentinel->next) << endl;
 			cout << "--------------------------------------------------------------------------------" << endl;
 		}
 		sentinel->prev->process->print();
+		cout << "head : " << std::boolalpha << (current_node == sentinel->next) << endl;
 	}
 	cout << "================================================================================" << endl;
 }
@@ -44,10 +46,12 @@ void ProcessQueue::print() const {
 ProcessQueue* ProcessQueue::perform_aging(unsigned int time, const unsigned int aging_threshold) {
 	ProcessQueue* incremented_process_queue = new ProcessQueue;
 	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
+		// cout << "ProcessQueue.cpp perform aging" << endl;
 		current_node->process->wait(time);
 		if (current_node->process->get_aging_counter() >= aging_threshold) {
+			// cout << "ProcessQueue.cpp promoting priority" << endl;
 			current_node->process->promote_priority();
-			cout << "ProcessQueue.cpp performing aging" << endl;
+			current_node->process->reset_aging_counter();
 	 		incremented_process_queue->enqueue(remove(current_node));
 		}
 	}
@@ -61,8 +65,14 @@ void ProcessQueue::merge_back(ProcessQueue* process_queue) {
 	process_queue->sentinel->next->prev = sentinel->prev;
 	new_tail_node->next = sentinel;
 	sentinel->prev = new_tail_node;
-	cout << "Deleting process_queue" << endl;
-	delete process_queue->sentinel;
+	// 2019.10.25
+	// leave sentinel like this for now
+	//
+
+	// cout << "ProcessQueue.cpp Deleting process_queue : " << process_queue << endl;
+	// cout << "Getting sentinel address : " << process_queue->sentinel << endl;
+	// delete process_queue->sentinel;
+	// cout << "ProcessQueue.cpp Deleted sentinel: " << process_queue << endl;
 }
 
 void ProcessQueue::enqueue(Process* process) {
@@ -89,8 +99,9 @@ Process* ProcessQueue::remove(ProcessNode* process_node) {
 				current_node->next->prev = current_node->prev;
 				current_node->prev->next = current_node->next;
 				Process* process = current_node->process;
-				cout << "Removing current node" << endl;
+				cout << "ProcessQueue.cpp Removing current node" << endl;
 				delete current_node;
+				cout << "Process is not dead after node is deleted : " << (process->get_pid()) << endl;
 				return process;
 			}
 		}

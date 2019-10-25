@@ -33,6 +33,8 @@ private:
 
 	Process* current_process{nullptr}; // The currently executing Process. nullptr means no Process is currently executing.
 	ProcessQueue* priority_queues{nullptr}; // Each queue is in charge of one priority level, so there are "max_priority + 1" queues in total.
+
+	Process* find_next_process();
 };
 
 #endif /* PROCESSSCHEDULER_H_ */
