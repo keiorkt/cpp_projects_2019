@@ -53,8 +53,8 @@ ProcessQueue* ProcessQueue::perform_aging(unsigned int time, const unsigned int 
 		if (current_node->process->get_aging_counter() >= aging_threshold) {
 			current_node->process->promote_priority();
 			current_node->process->reset_aging_counter();
-			Process* removed_node = remove(current_node);
-	 		process_queue_ll->enqueue(removed_node);
+			Process* removed_process = remove(current_node);
+	 		process_queue_ll->enqueue(removed_process);
 		}
 	}
 
@@ -62,7 +62,11 @@ ProcessQueue* ProcessQueue::perform_aging(unsigned int time, const unsigned int 
 }
 
 void ProcessQueue::merge_back(ProcessQueue* process_queue) {
-	if (process_queue->is_empty()) return;
+	if (process_queue->is_empty()) {
+		delete process_queue;
+		return;
+	}
+
 	ProcessNode* new_tail_node = process_queue->sentinel->prev;
 	sentinel->prev->next = process_queue->sentinel->next;
 	process_queue->sentinel->next->prev = sentinel->prev;
@@ -88,18 +92,19 @@ bool ProcessQueue::is_empty() const {
 
 // Be very careful when deleting the ProcessNode, don't accidentally delete the Process that we actually want to extract and return.
 Process* ProcessQueue::remove(ProcessNode* process_node) {
-	if (!is_empty()) {
-		for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
-			if (current_node == process_node) {
-				current_node->next->prev = current_node->prev;
-				current_node->prev->next = current_node->next;
-				Process* process = current_node->process;
-				delete current_node; // ERROR!! UNADDRESSABLE ACCESS of freed memory
-				return process;
-			}
+	if (is_empty()) { return nullptr; }
+
+	Process* removed_process = nullptr;
+	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
+		if (current_node == process_node) {
+			current_node->next->prev = current_node->prev;
+			current_node->prev->next = current_node->next;
+			removed_process = current_node->process;
+			delete current_node; // ERROR!! UNADDRESSABLE ACCESS of freed memory
+			return removed_process;
 		}
 	}
-	return nullptr;
+	return removed_process;
 }
 
 Process* ProcessQueue::get_head() const {
