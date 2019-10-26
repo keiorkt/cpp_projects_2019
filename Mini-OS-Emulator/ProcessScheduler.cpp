@@ -16,6 +16,7 @@ ProcessScheduler::ProcessScheduler(const unsigned int quantum_threshold, const u
 ProcessScheduler::~ProcessScheduler() {
 	if (has_current_process()) {
 		delete current_process;
+		current_process = nullptr;
 	}
 
 	delete [] priority_queues;
@@ -124,7 +125,7 @@ void ProcessScheduler::simulate(unsigned int time) {
 		if (current_process == nullptr) {
 			current_process = dequeue_next_process();
 		}
-		else if ((quantum_threshold != 0 && quantum_counter >= quantum_threshold) || (current_process == nullptr && get_next_process()->get_priority() > current_process->get_priority())){
+		else if ((quantum_threshold != 0 && quantum_counter >= quantum_threshold) || (current_process == nullptr && get_next_process()->get_priority() > current_process->get_priority())) {
 			priority_queues[current_process->get_priority()].enqueue(current_process);
 			current_process = dequeue_next_process();
 			quantum_counter = 0;
