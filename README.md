@@ -8,4 +8,5 @@
  - Go on console
 
 ## Mini-OS-Emulator
- - Simple scheduler on console using doubly curly linked list
+ - Simple process scheduler emulator works on console
+ - Using doubly curly linked list to encapsulate the process data 
