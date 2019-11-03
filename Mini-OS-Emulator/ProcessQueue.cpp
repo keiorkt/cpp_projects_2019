@@ -7,6 +7,9 @@
  */
 
 #include "ProcessQueue.h"
+#include <iostream>
+using std::cout;
+using std::endl;
 
 /*
  * These will fail as sentinel doesn't exist yet to point to itself.
@@ -99,8 +102,4 @@ Process* ProcessQueue::remove(ProcessNode* process_node) {
 	Process* removed_process = process_node->process;
 	delete process_node;
 	return removed_process;
-}
-
-Process* ProcessQueue::get_head() const {
-	return !is_empty() ? sentinel->next->process : nullptr;
 }

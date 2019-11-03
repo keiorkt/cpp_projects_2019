@@ -6,6 +6,9 @@
  */
 
 #include "Process.h"
+#include <iostream>
+using std::cout;
+using std::endl;
 
 // TODO, You may also use initializer list syntax " : ".
 Process::Process(const unsigned int pid, unsigned int execute_time, unsigned int priority) : pid{pid}, execute_time{execute_time}, priority{priority} {}

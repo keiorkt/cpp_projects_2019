@@ -1,15 +1,9 @@
 /*
- * You may add your own helper classes, structs, and functions here.
- * However, do NOT modify the existing ProcessScheduler class declaration.
+ * DO NOT MODIFY!
  */
 
 #ifndef PROCESSSCHEDULER_H_
 #define PROCESSSCHEDULER_H_
-
-#include <iostream>
-using std::cout;
-using std::endl;
-using std::to_string;
 
 #include "ProcessQueue.h"
 
@@ -33,9 +27,6 @@ private:
 
 	Process* current_process{nullptr}; // The currently executing Process. nullptr means no Process is currently executing.
 	ProcessQueue* priority_queues{nullptr}; // Each queue is in charge of one priority level, so there are "max_priority + 1" queues in total.
-
-	Process* dequeue_next_process(); // deque the next current process
-	Process* get_next_process() const; // return the next current process (const)
 };
 
 #endif /* PROCESSSCHEDULER_H_ */
