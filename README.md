@@ -7,3 +7,5 @@
 ## Go（囲碁）
  - Go on console
 
+## Mini-OS-Emulator
+ - Simple scheduler on console using doubly curly linked list
