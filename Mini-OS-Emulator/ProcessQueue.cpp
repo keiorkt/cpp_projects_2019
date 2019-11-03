@@ -45,20 +45,22 @@ void ProcessQueue::print() const {
 // TODO
 // Performs Aging on all Processes in ProcessQueue. Extracts and returns a ProcessQueue of Processes with incremented priority (can be empty).
 ProcessQueue* ProcessQueue::perform_aging(unsigned int time, const unsigned int aging_threshold) {
-	ProcessQueue* process_queue_ll = new ProcessQueue;
-
-	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
+	ProcessQueue* aged_queue = new ProcessQueue;
+	ProcessNode* current_node{sentinel->next};
+	while (current_node != sentinel) {
 		current_node->process->wait(time);
-
 		if (current_node->process->get_aging_counter() >= aging_threshold) {
 			current_node->process->promote_priority();
 			current_node->process->reset_aging_counter();
-			Process* removed_process = remove(current_node);
-	 		process_queue_ll->enqueue(removed_process);
+			current_node = current_node->next;
+			Process* removed_process = remove(current_node->prev);
+	 		aged_queue->enqueue(removed_process);
+		}
+		else {
+			current_node = current_node->next;
 		}
 	}
-
-	return process_queue_ll;
+	return aged_queue;
 }
 
 void ProcessQueue::merge_back(ProcessQueue* process_queue) {
@@ -66,7 +68,6 @@ void ProcessQueue::merge_back(ProcessQueue* process_queue) {
 		delete process_queue;
 		return;
 	}
-
 	ProcessNode* new_tail_node = process_queue->sentinel->prev;
 	sentinel->prev->next = process_queue->sentinel->next;
 	process_queue->sentinel->next->prev = sentinel->prev;
@@ -87,29 +88,19 @@ Process* ProcessQueue::dequeue() {
 }
 
 bool ProcessQueue::is_empty() const {
-	return (sentinel->next == sentinel);
+	return sentinel->next == sentinel;
 }
 
 // Be very careful when deleting the ProcessNode, don't accidentally delete the Process that we actually want to extract and return.
 Process* ProcessQueue::remove(ProcessNode* process_node) {
-	if (is_empty()) { return nullptr; }
-
-	Process* removed_process = nullptr;
-	for (ProcessNode* current_node{sentinel->next}; current_node != sentinel; current_node = current_node->next) {
-		if (current_node == process_node) {
-			current_node->next->prev = current_node->prev;
-			current_node->prev->next = current_node->next;
-			removed_process = current_node->process;
-			delete current_node; // ERROR!! UNADDRESSABLE ACCESS of freed memory
-			return removed_process;
-		}
-	}
+	if (process_node == sentinel) { return nullptr; }
+	process_node->prev->next = process_node->next;
+	process_node->next->prev = process_node->prev;
+	Process* removed_process = process_node->process;
+	delete process_node;
 	return removed_process;
 }
 
 Process* ProcessQueue::get_head() const {
-	if (!is_empty()) {
-		return sentinel->next->process;
-	}
-	return nullptr;
+	return !is_empty() ? sentinel->next->process : nullptr;
 }

@@ -16,7 +16,6 @@ ProcessScheduler::ProcessScheduler(const unsigned int quantum_threshold, const u
 ProcessScheduler::~ProcessScheduler() {
 	if (has_current_process()) {
 		delete current_process;
-		current_process = nullptr;
 	}
 
 	delete [] priority_queues;
@@ -92,11 +91,9 @@ void ProcessScheduler::simulate(unsigned int time) {
 		if (current_process == nullptr) {
 			bool all_empty = true;
 			for (unsigned int i{max_priority + 1}; i > 0; --i) {
-				if (!priority_queues[i-1].is_empty())
-					all_empty = false;
+				if (!priority_queues[i-1].is_empty()) { all_empty = false; }
 			}
-			if (all_empty)
-				continue;
+			if (all_empty) { continue; }
 		}
 
 		current_process->execute(EXEC_TIME);
@@ -137,7 +134,6 @@ Process* ProcessScheduler::get_next_process() const {
 	for (unsigned int i{max_priority + 1}; i > 0; --i) {
 		if (!priority_queues[i-1].is_empty()) {
 			return priority_queues[i-1].get_head();
-			break;
 		}
 	}
 	return nullptr;
@@ -148,7 +144,6 @@ Process* ProcessScheduler::dequeue_next_process() {
 	for (unsigned int i{max_priority + 1}; i > 0; --i) {
 		if (!priority_queues[i-1].is_empty()) {
 			return priority_queues[i-1].dequeue();
-			break;
 		}
 	}
 	return nullptr;
