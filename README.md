@@ -1,11 +1,11 @@
 # cpp_projects_2019
 
-## Software and Tool
+## C++ Version
  - C++11
- - eclipse & vim
 
 ## Go（囲碁）
- - Go on console
+ - Go game works on console
+ - It has a function to jump to any valid state in the history
 
 ## Mini-OS-Emulator
  - A simple process scheduler emulator works on console
