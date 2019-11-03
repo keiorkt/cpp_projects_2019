@@ -6,6 +6,11 @@
  */
 
 #include "ProcessScheduler.h"
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::to_string;
+
 
 // TODO, You may also use initializer list syntax " : ".
 ProcessScheduler::ProcessScheduler(const unsigned int quantum_threshold, const unsigned int max_priority, const unsigned int aging_threshold) :
@@ -85,7 +90,6 @@ void ProcessScheduler::add_process(unsigned int execute_time, unsigned int prior
  */
 void ProcessScheduler::simulate(unsigned int time) {
 	const int EXEC_TIME = 1;
-
   // Do nothing if no Process to execute. If all the queues are empty continue the for loop
 	for (unsigned int i = 0; i < time; ++i) {
 		if (current_process == nullptr) {
@@ -112,39 +116,40 @@ void ProcessScheduler::simulate(unsigned int time) {
 
     // perform Aging (if Aging Threshold is zero, ignore Aging steps)
 		if (aging_threshold != 0 && current_process != nullptr) {
-			for (unsigned int i{max_priority + 1}; i > 0; --i) {
-				if ((current_process->get_priority() > i-1) && (!priority_queues[i-1].is_empty())) {
+			for (unsigned int i{max_priority}; i > 0; --i) {
+				if (!priority_queues[i-1].is_empty()) {
 					priority_queues[i].merge_back(priority_queues[i-1].perform_aging(EXEC_TIME, aging_threshold));
 				}
 			}
 		}
 
-		if (current_process == nullptr) {
-			current_process = dequeue_next_process();
+		// set the default value
+		int next_priority = -1;
+		for (unsigned int i{max_priority + 1}; i > 0; --i) {
+			if (!priority_queues[i-1].is_empty()) {
+				next_priority = static_cast<int>(i-1);
+				break;
+			}
 		}
-		else if ((quantum_threshold != 0 && quantum_counter >= quantum_threshold) || (current_process == nullptr && get_next_process()->get_priority() > current_process->get_priority())) {
+
+		if (current_process == nullptr) { // find next current process
+			for (unsigned int i{max_priority + 1}; i > 0; --i) {
+				if (!priority_queues[i-1].is_empty()) {
+					current_process = priority_queues[i-1].dequeue();
+					break;
+				}
+			}
+		}
+		else if ((quantum_threshold != 0 && quantum_counter >= quantum_threshold) || (next_priority != -1 && static_cast<unsigned int>(next_priority) > current_process->get_priority())) {
 			priority_queues[current_process->get_priority()].enqueue(current_process);
-			current_process = dequeue_next_process();
+			current_process = nullptr;
+			for (unsigned int i{max_priority + 1}; i > 0; --i) {
+				if (!priority_queues[i-1].is_empty()) {
+					current_process = priority_queues[i-1].dequeue();
+					break;
+				}
+			}
 			quantum_counter = 0;
 		}
 	}
-}
-
-Process* ProcessScheduler::get_next_process() const {
-	for (unsigned int i{max_priority + 1}; i > 0; --i) {
-		if (!priority_queues[i-1].is_empty()) {
-			return priority_queues[i-1].get_head();
-		}
-	}
-	return nullptr;
-}
-
-
-Process* ProcessScheduler::dequeue_next_process() {
-	for (unsigned int i{max_priority + 1}; i > 0; --i) {
-		if (!priority_queues[i-1].is_empty()) {
-			return priority_queues[i-1].dequeue();
-		}
-	}
-	return nullptr;
 }

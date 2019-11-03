@@ -1,6 +1,5 @@
 /*
- * You may add your own helper classes, structs, and functions here.
- * However, do NOT modify the existing ProcessNode class declaration.
+ * DO NOT MODIFY!
  */
 
 #ifndef PROCESSNODE_H_
