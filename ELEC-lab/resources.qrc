@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>image/LightBulb/3.png</file>
+        <file>image/LightBulb/2.png</file>
+        <file>image/LightBulb/1.png</file>
+        <file>image/LightBulb/0.png</file>
+        <file>image/Battery/0.png</file>
+        <file>image/Resistance/0.png</file>
+        <file>image/Motor/0.png</file>
+        <file>image/Motor/1.png</file>
+        <file>image/Motor/2.png</file>
+    </qresource>
+</RCC>
