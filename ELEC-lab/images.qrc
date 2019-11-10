@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/Lightbulb">
+        <file>image/LightBulb/3.png</file>
+        <file>image/LightBulb/2.png</file>
+        <file>image/LightBulb/1.png</file>
+        <file>image/LightBulb/0.png</file>
+    </qresource>
+    <qresource prefix="/Battery">
+        <file>image/Battery/0.png</file>
+    </qresource>
+    <qresource prefix="/Resistance">
+        <file>image/Resistance/1000.png</file>
+    </qresource>
+    <qresource prefix="/LED">
+        <file>image/LED/0.png</file>
+        <file>image/LED/3.png</file>
+        <file>image/LED/2.png</file>
+        <file>image/LED/1.png</file>
+    </qresource>
+</RCC>
