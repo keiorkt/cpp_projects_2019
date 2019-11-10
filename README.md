@@ -10,3 +10,6 @@
 ## Mini-OS-Emulator
  - A simple process scheduler emulator works on console
  - Using doubly curly linked list to encapsulate the process data 
+
+## ELEC-lab
+ - Simple circuit simulator
