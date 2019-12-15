@@ -1,0 +1,47 @@
+### Dijkstra's shortest path algorithm
+
+Vertex source = "user select"
+
+store calculated_distance and vertex_pathway
+
+Vertex.all.set(unvisited: true)
+
+unvisited_vertices = map<name, vertex>
+
+source.distance = 0
+
+Vertex.unvisited.all.except(source).set(distance: -1)
+
+Vertex.all.previous_vertex = NULL
+
+QtQueue priority_queue
+
+priority_queue.enqeue(source)
+
+while (!priority_queue.is_empty()) {
+  current_vertex = priority_queue.deque();
+  # visited
+  unvisited_vertices[current_vertex].remove
+  tmp_distance = current_vertex.distance + distance(current_vertex, neighbor_vertex)
+  if (neighbor_vertex.distance > tmp_distance) {
+    neighbor_vertex.setDistance(tmp_distance)
+    priority_queue.enqueu(neighbor_vertex)
+    neighbor_vertex.previous_vertex = current_vertex
+  }
+}
+
+### Graph's data structure
+
+vector of list
+QVector<Qlist> graph;
+
+bool operator>(const Vertex& lhs, const Vertex& rhs);
+bool operator>(const Vertex& lhs, const Vertex& rhs) {
+  return lhs.distance > rhs.distance;
+}
+
+class Graph {
+  QHash<QString, Vertex> unvisited_vertices;
+  std::priority_queue<Vertex, std::vector<Vertex>, std::less<Vertex>> priority_q:
+  Vertex source; 
+}

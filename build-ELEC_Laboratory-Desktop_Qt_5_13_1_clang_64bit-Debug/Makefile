@@ -252,6 +252,7 @@ DIST          = ../ELEC-lab/Eigen/CMakeLists.txt \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/qt_config.prf \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/spec_post.prf \
+		../ELEC-lab/.qmake.stash \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/toolchain.prf \
@@ -794,6 +795,7 @@ Makefile: ../ELEC-lab/ELEC_Laboratory.pro /Users/keitaiwasaki/Qt/5.13.1/clang_64
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/qt_config.prf \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/toolchain.prf \
@@ -993,6 +995,7 @@ Makefile: ../ELEC-lab/ELEC_Laboratory.pro /Users/keitaiwasaki/Qt/5.13.1/clang_64
 /Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/qt_config.prf:
 /Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/keitaiwasaki/Qt/5.13.1/clang_64/mkspecs/features/toolchain.prf:
@@ -1068,6 +1071,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r ELEC_Laboratory.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 

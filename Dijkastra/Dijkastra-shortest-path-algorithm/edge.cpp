@@ -1,12 +1,12 @@
-#include <Components/wire.h>
+#include "edge.h"
 
 #include <cmath>
 #include <QBitmap>
 #include <QPainter>
 
-Wire::Wire(const QPoint &start, const QPoint &end,
-           const std::string &name, Impl *hostImpl, QWidget *parent)
-    : CircuitComponent(name, hostImpl, parent)
+Edge::Edge(const QPoint &start, const QPoint &end,
+           const std::string &name, QWidget *parent)
+    : Block(name, parent)
 {
     QPoint lefttop;
 
@@ -23,22 +23,7 @@ Wire::Wire(const QPoint &start, const QPoint &end,
     update();
 }
 
-std::string
-Wire::getType()
-{
-    return "Wire";
-}
-
-void
-Wire::displayInfo()
-{
-    // display nothing
-    display("");
-}
-
-void
-Wire::paintEvent(QPaintEvent *event)
-{
+void Edge::paintEvent(QPaintEvent *event) {
     // Call paint event of the base class
     QLabel::paintEvent(event);
     QPixmap image(size());
@@ -46,11 +31,11 @@ Wire::paintEvent(QPaintEvent *event)
     image.fill(Qt::transparent);
 
     QPainter painter(&image);
-    QColor color = Qt::green;
+    QColor color = Qt::black;
     color.setAlpha(150);
     QPen pen(color);
 
-    pen.setWidth(10);
+    pen.setWidth(3);
     painter.setPen(pen);
     painter.drawPoint(getPositive());
     painter.drawPoint(getNegative());
