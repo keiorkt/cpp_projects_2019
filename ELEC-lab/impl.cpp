@@ -139,7 +139,7 @@ Impl::getAvailName(std::string prefix)
     do {
 
         ret = prefix + std::to_string(id);
-        id ++;
+        id++;
 
     } while (pool.count(ret));
 
