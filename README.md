@@ -13,3 +13,7 @@
 
 ## ELEC-lab
  - Simple circuit simulator
+
+## Undirected Weighted Graphs and Dijkstra's Shortest Path Algorithm
+ - Visualization with QT
+ 
