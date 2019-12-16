@@ -6,7 +6,7 @@
 #include <QString>
 
 Vertex::Vertex(const QPoint &start, const std::string &name, QWidget *parent)
-    : Block(name, parent)
+    : Block(name, parent), location(start)
 {
     QPoint lefttop;
 
@@ -20,6 +20,11 @@ Vertex::Vertex(const QPoint &start, const std::string &name, QWidget *parent)
     setPositive(start - lefttop);
 
     update();
+}
+
+void Vertex::rightClickAction() {
+    emit onDelete(this);
+    this->deleteLater();
 }
 
 void Vertex::paintEvent(QPaintEvent *event) {
@@ -37,7 +42,7 @@ void Vertex::paintEvent(QPaintEvent *event) {
     pen.setWidth(10);
     painter.setPen(pen);
 
-    QString text = "99";
+    QString text = "";
 
     QPoint textLoc = getPositive();
     textLoc.setX(textLoc.x() - (text.length() == 1 ? 3 : 5));

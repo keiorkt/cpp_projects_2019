@@ -32,7 +32,6 @@ bool VertexPalette::eventFilter(QObject *, QEvent *event) {
 
     }
 
-
     return false;
 }
 

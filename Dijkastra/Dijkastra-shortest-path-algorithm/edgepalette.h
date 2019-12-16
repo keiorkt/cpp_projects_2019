@@ -5,6 +5,7 @@
 #include <QPoint>
 #include <QPushButton>
 #include "graph.h"
+#include "vertex.h"
 
 class EdgePalette : public QLabel {
     Q_OBJECT
@@ -14,7 +15,7 @@ public:
             QWidget *parent = nullptr);
 
 signals:
-    void addEdge(QPoint, QPoint);
+    void addEdge(QPoint, QPoint, Vertex*, Vertex*);
 
 protected slots:
     bool eventFilter(QObject *, QEvent *event) override;
@@ -29,6 +30,10 @@ private:
     QPoint startPoint;
 
     QPoint currentPoint;
+
+    Vertex* startVertex;
+
+    Vertex* endVertex;
 
     bool onVertex(QPoint);
 };

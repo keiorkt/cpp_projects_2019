@@ -31,12 +31,11 @@ bool EdgePalette::eventFilter(QObject *, QEvent *event) {
             if (isPainting) {
                 // Add this wire to circuit
                 isPainting = !isPainting;
-
-                // TODO : add weight
-                emit this->addEdge(startPoint, currentPoint);
+                emit addEdge(startPoint, currentPoint, startVertex, endVertex);
                 update();
             } else {
                 startPoint = currentPoint = e->pos();
+                startVertex = endVertex = graph->onVertex(startPoint);
                 isPainting = true;
                 update();
             }
@@ -45,6 +44,7 @@ bool EdgePalette::eventFilter(QObject *, QEvent *event) {
     } else if (event->type() == QEvent::MouseMove && isPainting) {
         QMouseEvent *e = static_cast<QMouseEvent*>(event);
         currentPoint = e->pos();
+        endVertex = graph->onVertex(currentPoint);
         update();
     }
 

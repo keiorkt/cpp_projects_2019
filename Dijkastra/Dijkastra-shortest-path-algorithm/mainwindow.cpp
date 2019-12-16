@@ -4,6 +4,9 @@
 #include "edgepalette.h"
 #include "vertexpalette.h"
 #include "vertex.h"
+#include <QInputDialog>
+#include <QDir>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,19 +14,20 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    graph = new Graph();
+
     backgroundInit();
 
     // Set the background color of buttons
     ui->drawVertexButton->setStyleSheet("background-color:gray;");
     ui->drawEdgeButton->setStyleSheet("background-color:gray;");
 
-    connect(edgePalette, SIGNAL(addEdge(QPoint,QPoint)),
-            this, SLOT(onAddEdge(QPoint,QPoint)));
+    connect(edgePalette, SIGNAL(addEdge(QPoint,QPoint,Vertex*,Vertex*)),
+            this, SLOT(onAddEdge(QPoint,QPoint,Vertex*,Vertex*)));
 
     connect(vertexPalette, SIGNAL(addVertex(QPoint)),
             this, SLOT(onAddVertex(QPoint)));
 
-    graph = new Graph();
 }
 
 MainWindow::~MainWindow()
@@ -48,7 +52,6 @@ void MainWindow::on_drawVertexButton_pressed() {
         ui->drawVertexButton->setStyleSheet("background-color:gray;");
 
     }
-
 }
 
 void MainWindow::on_drawEdgeButton_pressed() {
@@ -80,14 +83,27 @@ void MainWindow::backgroundInit() {
     edgePalette = new EdgePalette(ui->backgroundLabel, graph, ui->backgroundLabel->parentWidget());
 }
 
-void MainWindow::onAddEdge(QPoint start,QPoint end) {
-//    std::string name = getAvailableName("Edge");
-    std::string name = "edge";
-    Edge *edge = new Edge(start, end, name, ui->backgroundLabel);
+void MainWindow::onAddEdge(QPoint start, QPoint end, Vertex* startV, Vertex* endV) {
+    bool ok;
+    int weight = QInputDialog::getInt(this, tr("Input weight"), tr("weight"), 0, 1, 10000, 1, &ok);
+    if (ok) {
+        Edge *edge = new Edge(start, end, weight, startV, endV, "edge", ui->backgroundLabel);
+        connect(edge, SIGNAL(onDelete(Edge*)), this, SLOT(onDeleteEdge(Edge*)));
+        graph->addEdge(edge);
+    }
+}
+
+void MainWindow::onDeleteEdge(Edge* e) {
+    graph->removeEdge(e);
 }
 
 void MainWindow::onAddVertex(QPoint loc) {
     std::string name = "vertex";
     Vertex *vertex = new Vertex(loc, name, ui->backgroundLabel);
+    connect(vertex, SIGNAL(onDelete(Vertex*)), this, SLOT(onDeleteVertex(Vertex*)));
     graph->addVertex(vertex);
+}
+
+void MainWindow::onDeleteVertex(Vertex* v) {
+    graph->removeVertex(v);
 }

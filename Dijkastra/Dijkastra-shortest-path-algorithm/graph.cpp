@@ -16,7 +16,6 @@ void Graph::insertUV(Vertex* v) {
     uv[v->getLabel() % uv.capacity()] = v;
 }
 
-
 void Graph::addEdge(Edge* a) {
     edg[a->getStart()->getLabel()].append(a);
     addEdge(a->getStart(), a->getEnd());
@@ -24,10 +23,10 @@ void Graph::addEdge(Edge* a) {
 
 void Graph::addEdge(Vertex* a, Vertex* b) {
     for (int i = 0; i < adj.size(); ++i) {
-        if (adj[i].front()->getLabel() == a->getLabel()) {
+        if (!adj[i].empty() && adj[i].front()->getLabel() == a->getLabel()) {
             adj[i].push_back(b);
         }
-        else if (adj[i].front()->getLabel() == b->getLabel()) {
+        else if (!adj[i].empty() && adj[i].front()->getLabel() == b->getLabel()) {
             adj[i].push_back(a);
         }
     }
@@ -40,10 +39,10 @@ void Graph::removeEdge(Edge* a) {
 
 void Graph::removeEdge(Vertex* a, Vertex* b) {
     for (int i = 0; i < adj.size(); ++i) {
-        if (adj[i].front()->getLabel() == a->getLabel()) {
+        if (!adj[i].empty() && adj[i].front()->getLabel() == a->getLabel()) {
             adj[i].removeOne(b);
         }
-        else if (adj[i].front()->getLabel() == b->getLabel()) {
+        else if (!adj[i].empty() && adj[i].front()->getLabel() == b->getLabel()) {
             adj[i].removeOne(a);
         }
     }
@@ -57,15 +56,17 @@ void Graph::addVertex(Vertex* a) {
 
 void Graph::removeVertex(Vertex* a) {
     for (int i = 0; i < adj.size(); ++i) {
-        for (int j = 0; j < adj[i].size(); ++j) {
-            if (adj[i][j]->getLabel() == a->getLabel()) {
-                adj[i].removeAt(j);
+        if (!adj[i].empty()) {
+            for (int j = 0; j < adj[i].size(); ++j) {
+                if (adj[i][j]->getLabel() == a->getLabel()) {
+                    adj[i].removeAt(j);
+                }
             }
         }
     }
 
     for (int i = 0; i < adj.size(); ++i) {
-        if (adj[i].front()->getLabel() == a->getLabel()) {
+        if (!adj[i].empty() && adj[i].front()->getLabel() == a->getLabel()) {
           adj.removeAt(i);
           adj.resize(adj.size()-1);
         }
@@ -76,16 +77,18 @@ int Graph::getMaxLabel() {
     if (adj.empty()) {
         return -1;
     } else {
-        return adj.back().front()->getLabel();
+        return adj.size();
     }
 }
 
 bool Graph::isOnVertex(QPoint p) {
     for (int i = 0; i < adj.size(); ++i) {
-        QPoint vpoint = adj[i].front()->getPositive();
-        QRect r = QRect(QPoint(vpoint.x()+5, vpoint.y()+5), QPoint(vpoint.x()-5, vpoint.y()-5));
-        if (r.contains(p)) {
-            return true;
+        if (!adj[i].empty()) {
+            QPoint vpoint = adj[i].front()->getLocation();
+            QRect r = QRect(QPoint(vpoint.x()+5, vpoint.y()+5), QPoint(vpoint.x()-5, vpoint.y()-5));
+            if (r.contains(p)) {
+                return true;
+            }
         }
     }
 
@@ -94,10 +97,12 @@ bool Graph::isOnVertex(QPoint p) {
 
 Vertex* Graph::onVertex(QPoint p) {
     for (int i = 0; i < adj.size(); ++i) {
-        QPoint vpoint = adj[i].front()->getPositive();
-        QRect r = QRect(QPoint(vpoint.x()+5, vpoint.y()+5), QPoint(vpoint.x()-5, vpoint.y()-5));
-        if (r.contains(p)) {
-            return adj[i].front();
+        if (!adj[i].empty()) {
+            QPoint vpoint = adj[i].front()->getLocation();
+            QRect r = QRect(QPoint(vpoint.x()+5, vpoint.y()+5), QPoint(vpoint.x()-5, vpoint.y()-5));
+            if (r.contains(p)) {
+                return adj[i].front();
+            }
         }
     }
 

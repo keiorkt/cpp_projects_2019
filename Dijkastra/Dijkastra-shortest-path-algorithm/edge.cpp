@@ -4,9 +4,9 @@
 #include <QBitmap>
 #include <QPainter>
 
-Edge::Edge(const QPoint &start, const QPoint &end,
-           const std::string &name, QWidget *parent)
-    : Block(name, parent)
+Edge::Edge(const QPoint &start, const QPoint &end, const int weight, Vertex* startV,
+           Vertex* endV, const std::string &name, QWidget *parent)
+    : Block(name, parent), weight(weight), start(startV), end(endV)
 {
     QPoint lefttop;
 
@@ -21,6 +21,11 @@ Edge::Edge(const QPoint &start, const QPoint &end,
     setNegative(end - lefttop);
 
     update();
+}
+
+void Edge::rightClickAction() {
+    emit onDelete(this);
+    this->deleteLater();
 }
 
 void Edge::paintEvent(QPaintEvent *event) {
@@ -44,6 +49,14 @@ void Edge::paintEvent(QPaintEvent *event) {
     pen.setWidth(3);
     painter.setPen(pen);
     painter.drawLine(line);
+
+    int weightX = (getNegative().x() - getPositive().x())/2;
+    int weightY = (getNegative().y() - getPositive().y())/2;
+    QPoint weightLocation = QPoint(weightX, weightY);
+    QPen blackPen(Qt::black);
+    painter.setPen(blackPen);
+    painter.setFont(QFont("Arial", 10));
+    painter.drawText(weightLocation, QString::number(getWeight()));
 
     setPixmap(image);
     setMask(image.mask());
