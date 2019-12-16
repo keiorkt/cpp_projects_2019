@@ -6,6 +6,8 @@
 
 class Vertex : public Block {
 
+    Q_OBJECT
+
 public:
     Vertex(const QPoint &start, const std::string &name, QWidget *parent = nullptr);
 
@@ -21,8 +23,14 @@ public:
 
     void setPreviousV(Vertex* v) { previousV = v; }
 
+    QPoint getLocation() { return location; }
+
+signals:
+    void onDelete(Vertex*);
+
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void rightClickAction() override;
 
 private:
     int distance;
@@ -30,6 +38,9 @@ private:
     int label;
 
     Vertex* previousV;
+
+    QPoint location;
+
 };
 
 bool operator>(const Vertex& lhs, const Vertex& rhs);

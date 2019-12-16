@@ -4,6 +4,7 @@
 #include "edgepalette.h"
 #include "vertexpalette.h"
 #include "graph.h"
+#include "impl.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -34,10 +35,16 @@ private:
 
     Graph* graph;
 
+    Impl* impl;
+
 public slots:
-    void onAddEdge(QPoint, QPoint);
+    void onAddEdge(QPoint, QPoint, Vertex*, Vertex*);
 
     void onAddVertex(QPoint);
+
+    void onDeleteVertex(Vertex*);
+
+    void onDeleteEdge(Edge*);
 
 private slots:
     void on_drawVertexButton_pressed();

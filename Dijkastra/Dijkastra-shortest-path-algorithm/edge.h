@@ -7,9 +7,11 @@
 
 class Edge : public Block {
 
+    Q_OBJECT
+
 public:
-    Edge(const QPoint &start, const QPoint &end,
-             const std::string &name, QWidget *parent = nullptr);
+    Edge(const QPoint &start, const QPoint &end, const int weight, Vertex* startV,
+         Vertex* endV, const std::string &name, QWidget *parent = nullptr);
 
     int getWeight() { return weight; }
 
@@ -19,15 +21,19 @@ public:
 
     Vertex* getEnd() { return end; }
 
+signals:
+    void onDelete(Edge*);
+
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void rightClickAction() override;
 
 private:
     int weight;
 
-    Vertex* start{nullptr};
+    Vertex* start;
 
-    Vertex* end{nullptr};
+    Vertex* end;
 };
 
 #endif // EDGE_H

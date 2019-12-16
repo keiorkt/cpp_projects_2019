@@ -11,7 +11,7 @@ class CircuitComponent;
 class CircuitGraph
 {
 public:
-    CircuitGraph(); 
+    CircuitGraph();
 
     std::string calculateGraph(const std::map<std::string, CircuitComponent*> &pool);
 
